@@ -1,0 +1,96 @@
+Summary:
+1. ng generate component <COMPONENT_NAME> - uses the Angular CLI
+2. add new component's selector to app.component.html (root or any parent component)
+3. create necessary typescript classes - defines the data's structure to be passed to the HTML template
+4. import necessary typescript classes to new.component.ts
+5. create array of typescript objects in new.component.ts - the data to be passed to the HTML template
+6. add html to new.component.html - the template for the component and add data bindings - {{data.var}} - *ngFor
+7. add any new Angular Material modules to app.module.ts imports
+8. add any new style to styles.scss like the display:flex in a .container
+
+------------------------------------------------------------------------------------------------
+
+//Use Angular CLI to generate component
+//it is automatically added and declared in app.module.ts
+//creates component folder below app for hierarchy of components
+ng generate component <COMPONENT_NAME>
+
+app.component.html:
+//Add the new component's tag or selector for the app component to use the new component
+    <COMPONENT_SELECTOR></COMPONENT_SELECTOR>
+    <app-menu></app-menu>
+//the name of the selector is defined in 
+//menu.component.ts
+
+Shared Typescript classes:
+app/shared
+shared class example:
+------------------------
+export class Dish {
+    id: string;
+    name: string;
+    image: string;
+    category: string;
+    featured: boolean;
+    label: string;
+    price: string;
+    description: string;
+}
+--------------------------
+
+menu.component.ts:
+//Import a typescript class:
+import { Dish } from '../shared/dish';
+//declare an array of Typescript objects:
+--------------------------
+dishes: Dish[] = [
+    {
+      id: '0',
+      name: 'Uthappizza',
+      image: '/assets/images/uthappizza.png',
+      category: 'mains',
+      featured: true,
+      label: 'Hot',
+      price: '4.99',
+      // tslint:disable-next-line:max-line-length
+      description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+    }, ...
+----------------------------
+
+menu.component.html:
+//Add the html code, use Angular Material components and Flex Layout
+- fxLayout
+- fxLayoutGap
+- fxFlex
+Structural directive: *ngFor = "let item of items"
+"{{item.name}}"
+<mat-list>
+    <mat-list-item>
+<mat-grid-list>
+    <mat-grid-tile>
+        <mat-grid-tile-footer>
+<mat-card>
+    <mat-card-header>
+         <mat-card-title>
+    <img mat-card-image>
+    <mat-card-content>
+    <mat-button>
+const DISHES: Dish[] = [{}]
+Angular pipes: {{ | }}
+Variables in the new.component.ts class export can be
+accessed directly by the Structural Directives:
+- *ngFor = "let dish of dishes"
+- *ngIf = "isSelected"
+- *ngSwitch
+
+
+app.module.ts:
+//Add new Angular Material components to imports:
+import { MatListModule } from '@angular/material/list';
+and to the imports in @NgModule
+
+style.scss:
+//Add styles and use the flex layout:
+.container {
+    margin: 20px; display: flex;
+}
