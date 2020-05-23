@@ -65,7 +65,24 @@ menu.component.html:
 Structural directive: *ngFor = "let item of items"
 "{{item.name}}"
 <mat-list>
-<mat-list-item>
+    <mat-list-item>
+<mat-grid-list>
+    <mat-grid-tile>
+        <mat-grid-tile-footer>
+<mat-card>
+    <mat-card-header>
+         <mat-card-title>
+    <img mat-card-image>
+    <mat-card-content>
+    <mat-button>
+const DISHES: Dish[] = [{}]
+Angular pipes: {{ | }}
+Variables in the new.component.ts class export can be
+accessed directly by the Structural Directives:
+- *ngFor = "let dish of dishes"
+- *ngIf = "isSelected"
+- *ngSwitch
+
 
 app.module.ts:
 //Add new Angular Material components to imports:
