@@ -1,0 +1,79 @@
+Summary:
+1. create folder ./app/services
+2. ng generate service services/<SERVICE_NAME>
+3. in service import classes (data classes in shared folder)
+4. declare getter (fetch data) in service
+5. injection: in app.module.ts import service and add as provider
+6. menu.component.ts: import service
+7. menu.component.ts: declare service in constructor as private
+8. menu.component.ts: ngOnInit() call service getter to fetch data and store in an instance variable of the component
+
+
+DEPENDENCY INJECTION Software Pattern:
+The service is made part of the client's
+state. "using" relationship
+Passing the service to the client, 
+rather than allowing a client to build or 
+find the service, is the fundamental 
+requirement of the pattern.
+
+Angular CLI:
+----------------------------------------
+ng generate service services/dish
+----------------------------------------
+
+
+dish.service.ts:
+----------------------------------------
+. . .
+
+import { Dish } from '../shared/dish';
+import { DISHES } from '../shared/dishes';
+
+. . .
+
+  getDishes(): Dish[] {
+    return DISHES;
+  }
+. . .
+----------------------------------------
+
+
+app.module.ts: 
+----------------------------------------
+. . .
+
+import { DishService } from './services/dish.service';
+
+@NgModule({
+. . .
+
+  providers: [DishService],
+
+. . .
+----------------------------------------
+
+
+menu.component.ts:
+----------------------------------------
+. . .
+
+import { DishService } from '../services/dish.service';
+
+. . .
+
+export class MenuComponent implements OnInit {
+
+  dishes: Dish[];
+
+  selectedDish: Dish;
+
+  constructor(private dishService: DishService) { }
+  
+  ngOnInit() {
+    this.dishes = this.dishService.getDishes();
+  }
+
+. . .
+
+}
