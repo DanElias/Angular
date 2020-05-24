@@ -1,0 +1,61 @@
+Summary:
+{{ value }}
+(DOM_event) = 'handler'
+[property_child] = 'value_parent' 
+[( ngModel )] = 'property'
+
+*************************************************
+
+Bind Data From Component to DOM
+{{ value }}
+this value is declared in the component's class
+as an instance variable
+
+*************************************************
+
+Event Handling from DOM to Component
+Used to modify a variable of a component (setter)
+(DOM_event) = 'handler'
+-------------------------------
+menu.component.ts:
+-------------------------------
+onSelect(dish: Dish) {
+    this.selectedDish = dish;
+  }
+--------------------------------
+menu.component.html:
+--------------------------------
+<mat-grid-tile 
+    *ngFor="let dish of dishes" 
+    (click) = "onSelect(dish)"
+>
+--------------------------------
+!Notice the dish in the ngFor is the same 
+parameter pased on the handler method
+
+*************************************************
+
+Bind Data From Parent Component to Child Component
+[property_child] = 'value_parent' 
+--------------------------------
+menu.component.html:
+--------------------------------
+<app-dishdetail 
+    [dish] = "selectedDish"
+>
+</app-dishdetail>
+--------------------------------
+dishdetail.component.ts:
+--------------------------------
+import { Component, OnInit, Input } from '@angular/core';
+...
+@Input()
+dish: Dish;
+--------------------------------
+In this example [dish] is an instance 
+variable with the @Input decorator defined
+in the child component class. 
+This indicates the component receives the
+data from another source, in this case 
+from "selectedDish" which is an instance
+variable of the parent component.
