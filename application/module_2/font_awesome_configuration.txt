@@ -1,0 +1,5 @@
+npm install font-awesome@4.7.0
+
+src/_variables.scss
+
+styles.scss //import variables and font-awesome
